@@ -4,13 +4,13 @@
 #include <SPI.h>
 #include "RF24.h"
 
-// *************** VARIABLES ***************
+// ****************************************************
+// VARIABLES DE RADIOS (DUAL-SPI)
+// ****************************************************
 
 // Pines de control para la RADIO 1 1 (VSPI, controlador 1)
 #define CE1_PIN 4
 #define CSN1_PIN 5
-
-// Pines de BUS SPI 1 (VSPI, controlador 1)
 #define SCK1_PIN 18
 #define MISO1_PIN 19
 #define MOSI1_PIN 23
@@ -18,15 +18,11 @@
 // Pines de control para la RADIO 2 (HSPI, controlador 2)
 #define CE2_PIN 2
 #define CSN2_PIN 15
-
-// Pines de BUS SPI 2 (HSPI, controlador 2)
 #define SCK2_PIN 25
 #define MISO2_PIN 26
 #define MOSI2_PIN 27
 
 const long SERIAL_BAUD = 115200;
-
-// *************** END VARIABLES ***************
 
 // Controladores SPI Duales
 SPIClass spi1(VSPI); // Radio 1
