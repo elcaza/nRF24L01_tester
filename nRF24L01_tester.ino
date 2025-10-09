@@ -39,8 +39,8 @@ RF24 radio2(CE2_PIN, CSN2_PIN);
 
 // Prueba para iniciar el módulo 
 bool test_radio_connection(RF24& radio, SPIClass& spi_bus, int radio_id) {
-	Serial.print(F("\n INICIANDO PRUEBA PARA RADIO "));
-	Serial.print(radio_id);
+	Serial.print(F("\nINICIANDO PRUEBA PARA RADIO "));
+	Serial.println(radio_id);
 
 	// Iniciar la librería RF24
 	if (!radio.begin(&spi_bus)) {
@@ -51,8 +51,6 @@ bool test_radio_connection(RF24& radio, SPIClass& spi_bus, int radio_id) {
 
 	// 2. Prueba si detecta algo conectado al ESP32
 	if (radio.isChipConnected()) {
-		Serial.print(F("======================================="));
-		Serial.print(radio_id);
 		Serial.println(F("Módulo conectado correctamente al bus SPI."));
 		return true;
 	} else {
@@ -77,7 +75,7 @@ void setup() {
 	//  Radio 1 
 	// Configuración del SPI con el controlador VSPI
 	spi1.begin(SCK1_PIN, MISO1_PIN, MOSI1_PIN, -1);
-	Serial.print(F("INFO: Bus 1 (VSPI) en SCK/MISO/MOSI: "));
+	Serial.print(F("\nINFO: Bus 1 (VSPI) en SCK/MISO/MOSI: "));
 	Serial.print(SCK1_PIN); Serial.print("/"); Serial.print(MISO1_PIN); Serial.print("/"); Serial.println(MOSI1_PIN);
 
 	success_radio1 = test_radio_connection(radio1, spi1, 1);
@@ -85,17 +83,17 @@ void setup() {
 	//  Radio 2 
 	// Configuración del SPI con el controlador HSPI
 	spi2.begin(SCK2_PIN, MISO2_PIN, MOSI2_PIN, -1);
-	Serial.print(F("INFO: Bus 2 (HSPI) en SCK/MISO/MOSI: "));
+	Serial.print(F("\nINFO: Bus 2 (HSPI) en SCK/MISO/MOSI: "));
 	Serial.print(SCK2_PIN); Serial.print("/"); Serial.print(MISO2_PIN); Serial.print("/"); Serial.println(MOSI2_PIN);
 
 	success_radio2 = test_radio_connection(radio2, spi2, 2);
 
-	Serial.println(F("\n================================================="));
+	Serial.println(F("\n=== RESULTADO FINAL"));
 
 	if (success_radio1 && success_radio2) {
-		Serial.println(F("Ambas radios estan cableadas y responden correctamente."));
+		Serial.println(F("OK: Ambas radios estan cableadas y responden correctamente."));
 	} else {
-		Serial.println(F("Una o ambas radios fallaron."));
+		Serial.println(F("ERROR: Una o ambas radios fallaron. Verifica el cableado. Quizá los puertos de tu ESP32 están quemados, no sirven (Prueba con puertos alternativos). Quizá tu módulo no funciona."));
 		while(1); 
 	}
 }

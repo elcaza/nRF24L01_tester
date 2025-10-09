@@ -16,8 +16,8 @@ Este proyecto considera:
 # Instrucciones de uso
 1. Conecta tu dispositivo
 2. Compila y carga el código en el ESP32
+3. A través del "Serial Monitor (115200)" podrás ver si existen errores 
+    + Prueba al menos dos veces reiniciando el dispositivo
 
 # Conexiones
 <img src="https://raw.githubusercontent.com/elcaza/nRF24L01_tester/refs/heads/main/images/connections.png">
-
-
